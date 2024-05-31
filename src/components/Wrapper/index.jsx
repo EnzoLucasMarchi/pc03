@@ -7,14 +7,14 @@ export const Wrapper = ({tipAmount, totalAmount})=>{
               <h2>Tip Amount</h2>
               <p>/ person</p>
             </div>
-            <h3>$<span id="tip-amount">{tipAmount || 0}</span></h3>
+            <h3>$<span id="tip-amount">{tipAmount}</span></h3>
           </div>
           <div className="total-amount">
             <div>
               <h2>Total</h2>
               <p>/ person</p>
             </div>
-            <h3>$<span id="total">{totalAmount || 0}</span></h3>
+            <h3>$<span id="total">{totalAmount}</span></h3>
           </div>
         </div><button type="button" id="reset-button" className="reset-button">RESET</button>
       </div>

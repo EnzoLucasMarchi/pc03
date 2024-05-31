@@ -1,23 +1,27 @@
 
 
-export const Buttons = ()=>{
-
-    const buttonList=[5, 10, 15, 25, 50]
-
-    return(
+export const Buttons = ({ percentage, setPercentage }) => {
+    const buttonList = [5, 10, 15, 25, 50]
+    return (
         <>
-             <ul>
+            <ul>
                 {
-                    buttonList.map(button => 
-                    <li key={button} id={`percentage-${button}`}><button type="button" className="percentage-button" value={button}>
-                        {button}%
-                        </button></li>
-                        )
+                    buttonList.map(button =>
+                        <li key={button} id={`percentage-${button}`}>
+                            <button type="button" className={`percentage-button ${percentage === button && 'active'}`} value={button} onClick={() => setPercentage(button)}>
+                                {button}%
+                            </button>
+                        </li>)
                 }
-
-  
-            <li><input type="number" placeholder="Custom" id="custom-percentage-button" className="percentage-button" /></li>
-          </ul>
+                <li>
+                    <input 
+                    type="number" 
+                    placeholder="Custom" 
+                    id="custom-percentage-button" 
+                    className="percentage-button" 
+                    onChange={(e)=>setPercentage(e.target.value)}/>
+                    </li>
+            </ul>
         </>
     )
 }

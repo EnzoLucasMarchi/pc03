@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Buttons } from './components/Buttons'
 import { Input } from './components/Input'
 import { Wrapper } from './components/Wrapper'
@@ -9,7 +9,21 @@ function App() {
   const [bill, setBill] = useState(0);
   const [people, setPeople] = useState(1);
   const [percentage, setPercentage] = useState(0);
+  
+  const [tipAmount, setTipAmount] = useState(0);
+  const [totalAmount, setTotalPerson] = useState(0);
 
+  useEffect(()=>{
+    if(people>0){
+      setTipAmount(()=>{
+        return(parseFloat(((bill*percentage)/100)/people).toFixed(2))
+      })
+      setTotalPerson(()=>{
+        return(parseFloat((((bill*percentage)/100)/people)+(bill/people)).toFixed(2))
+      })
+    }
+
+  }, [bill, people, percentage])
   
 
   return (
@@ -22,14 +36,14 @@ function App() {
           <Input id={'input-bill'} btnFor={'input-bill'} btnClass={'input-bill'} value={bill} setValue={(e)=>setBill(e.target.value)}/>
 
           <h2>Select Tip %</h2>
-          <Buttons/>
+          <Buttons percentage={percentage} setPercentage={setPercentage}/>
 
           <h2>Number of People</h2>
           <Input id={'input-people'} btnFor={'input-people'} btnClass={'input-people'} value={people} setValue={(e)=>setPeople(e.target.value)}/>
 
         </div>
 
-        <Wrapper/>
+        <Wrapper tipAmount={tipAmount} totalAmount={totalAmount}/>
 
       </div>
     </>
@@ -39,6 +53,7 @@ function App() {
 export default App
 
 
-// useEffect(()=>{
+
+  // useEffect(()=>{
 //  console.log(bill)
 // }, [bill])
